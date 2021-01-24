@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import cfg from '../config';
+import Chart from './Chart';
 
 const StockCards = (props) => {
   const { stockSymbols, callBack } = props;
@@ -27,6 +28,7 @@ const StockCard = (props) => {
   const [symbolData, setSymbolData] = useState([]);
   const [symbolQuote, setSymbolQuote] = useState([]);
 
+  // get all data on symbol
   useEffect(async () => {
     axios.get(`${AV_URL}/query?function=OVERVIEW&symbol=${query}&apikey=${AV_KEY}`)
       .then((res) => {
@@ -37,6 +39,7 @@ const StockCard = (props) => {
       });
   }, []);
 
+  // get quote data on symbol
   useEffect(async () => {
     axios.get(`${AV_URL}/query?function=GLOBAL_QUOTE&symbol=${query}&apikey=${AV_KEY}`)
       .then((res) => {
@@ -47,6 +50,7 @@ const StockCard = (props) => {
       });
   }, []);
 
+  // what arrow to show for gain/drop
   const upDown = () => {
     if (!symbolQuote || !symbolQuote['09. change'] || symbolQuote['09. change'] === '0') {
       return 'fa-arrows-h';
@@ -59,7 +63,6 @@ const StockCard = (props) => {
     return 'fa-arrow-up';
   };
 
-  console.log(symbolQuote);
   return (
     <div className="col col-4">
       <div className="card">
@@ -91,17 +94,20 @@ const StockCard = (props) => {
             { !symbolQuote || !symbolQuote['05. price'] ? '-.--' : parseFloat(symbolQuote['05. price']).toFixed(2) }
             {' '}
             (
-            { !symbolQuote['10. change percent'] ? '--%' : symbolQuote['10. change percent'] }
+            { !symbolQuote || !symbolQuote['10. change percent'] ? '--%' : symbolQuote['10. change percent'] }
             )
           </h6>
+
+          <Chart query={query} />
+
           <h5 className="card-title">Stats</h5>
           <div className="row">
             <div className="col">High</div>
-            <div className="col">{ !symbolQuote['03. high'] ? '-.--' : parseFloat(symbolQuote['03. high']).toFixed(2) }</div>
+            <div className="col">{ !symbolQuote || !symbolQuote['03. high'] ? '-.--' : parseFloat(symbolQuote['03. high']).toFixed(2) }</div>
           </div>
           <div className="row">
             <div className="col">Low</div>
-            <div className="col">{ !symbolQuote['04. low'] ? '-.--' : parseFloat(symbolQuote['04. low']).toFixed(2) }</div>
+            <div className="col">{ !symbolQuote || !symbolQuote['04. low'] ? '-.--' : parseFloat(symbolQuote['04. low']).toFixed(2) }</div>
           </div>
         </div>
       </div>
