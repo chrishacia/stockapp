@@ -64,50 +64,57 @@ const StockCard = (props) => {
   };
 
   return (
-    <div className="col col-4">
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">
-            <strong style={{ color: '#AAA' }}>{ query }</strong>
-            {' '}
-            {!symbolData.Name ? '-------' : symbolData.Name}
-            {' '}
-            <button
-              className="btn btn-sm pull-right"
-              type="button"
-              onClick={() => {
-                callBack(query);
-              }}
-              onKeyDown={() => {
-                callBack(query);
-              }}
-            >
-              <i
-                className="fa fa-times"
-              />
-            </button>
-          </h5>
-          <h6 className="card-subtitle mb-2 text-muted">
-            <i className={(`fa ${upDown()}`)} />
-            {' '}
-            $
-            { !symbolQuote || !symbolQuote['05. price'] ? '-.--' : parseFloat(symbolQuote['05. price']).toFixed(2) }
-            {' '}
-            (
-            { !symbolQuote || !symbolQuote['10. change percent'] ? '--%' : symbolQuote['10. change percent'] }
-            )
-          </h6>
-
+    <div className="col col-6">
+      <div className="row">
+        <div className="col col-6">
           <Chart query={query} />
-
-          <h5 className="card-title">Stats</h5>
-          <div className="row">
-            <div className="col">High</div>
-            <div className="col">{ !symbolQuote || !symbolQuote['03. high'] ? '-.--' : parseFloat(symbolQuote['03. high']).toFixed(2) }</div>
-          </div>
-          <div className="row">
-            <div className="col">Low</div>
-            <div className="col">{ !symbolQuote || !symbolQuote['04. low'] ? '-.--' : parseFloat(symbolQuote['04. low']).toFixed(2) }</div>
+        </div>
+        <div className="col col-6">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">
+                {!symbolQuote || !symbolData.Name ? '-------' : symbolData.Name}
+                <button
+                  className="btn btn-sm pull-right"
+                  type="button"
+                  onClick={() => {
+                    callBack(query);
+                  }}
+                  onKeyDown={() => {
+                    callBack(query);
+                  }}
+                >
+                  <i
+                    className="fa fa-times"
+                  />
+                </button>
+              </h5>
+              <h6 className="card-subtitle mb-2 text-muted">
+                {!symbolQuote || !symbolData.Exchange ? '------' : symbolData.Exchange}
+                {': '}
+                <strong style={{ color: '#AAA' }}>{ query }</strong>
+              </h6>
+              <br />
+              <h6 className="card-subtitle mb-2 text-muted">
+                <i className={(`fa ${upDown()}`)} />
+                {' '}
+                $
+                { !symbolQuote || !symbolQuote['05. price'] ? '-.--' : parseFloat(symbolQuote['05. price']).toFixed(2) }
+                {' '}
+                (
+                { !symbolQuote || !symbolQuote['10. change percent'] ? '--.--' : parseFloat(symbolQuote['10. change percent']).toFixed(2) }
+                )
+              </h6>
+              <br />
+              <div className="row">
+                <div className="col">High</div>
+                <div className="col">{ !symbolQuote || !symbolQuote['03. high'] ? '-.--' : parseFloat(symbolQuote['03. high']).toFixed(2) }</div>
+              </div>
+              <div className="row">
+                <div className="col">Low</div>
+                <div className="col">{ !symbolQuote || !symbolQuote['04. low'] ? '-.--' : parseFloat(symbolQuote['04. low']).toFixed(2) }</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
