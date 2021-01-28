@@ -31,16 +31,16 @@ const SearchBar = (props) => {
   return (
     <div className="container container-padding-top">
       <div className="row">
-        <div className="col col-4">
+        <div className="col col-20">
           <AsyncTypeahead
             filterBy={filterBy}
-            id="async-example"
+            id="async-chart"
             isLoading={isLoading}
             labelKey="name"
             minLength={2}
             onSearch={handleSearch}
             options={options}
-            placeholder="Search Stocks"
+            placeholder="Start typing to search stocks..."
             renderMenuItemChildren={(option) => (
               <>
                 <div
@@ -54,12 +54,12 @@ const SearchBar = (props) => {
                   }}
                 >
                   <i
-                    className="fa fa-bookmark-o"
+                    className="fa fa-bookmark-o space"
                     aria-label="Compare"
-                    style={{ color: '#29ab87', pointer: 'cursor' }}
+                    style={{ color: '#fff', pointer: 'cursor' }}
                   />
                   {' '}
-                  <strong style={{ color: '#AAA' }}>{ option.symbol }</strong>
+                  <strong style={{ color: '#fff' }}>{ option.symbol }</strong>
                   {' '}
                   { option.name }
                 </div>

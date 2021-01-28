@@ -25,16 +25,16 @@ const Chart = (props) => {
   console.log(annualEarnings);
 
   return (
-    <ResponsiveContainer width="95%" height={250}>
+    <ResponsiveContainer width="100%" height={250}>
       <LineChart
         data={annualEarnings}
       >
-        <CartesianGrid strokeDasharray="3 3" fill="#FFF" />
+        <CartesianGrid strokeDasharray="3 3" fill="transparent" />
         <XAxis dataKey="reportedEPS" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="reportedEPS" stroke="#82ca9d" label="Reported EPS" />
+        <Line type="monotone" dataKey="reportedEPS" stroke="#FFF" label="Reported EPS" />
       </LineChart>
     </ResponsiveContainer>
   );

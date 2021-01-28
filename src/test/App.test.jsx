@@ -7,4 +7,3 @@ test('Nottingham Trades in Header', () => {
   const linkElement = screen.getByText(/Nottingham Trades/i);
   expect(linkElement).toBeInTheDocument();
 });
-

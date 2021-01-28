@@ -8,7 +8,7 @@ const StockCards = (props) => {
   const { stockSymbols, callBack } = props;
 
   return (
-    <div className="container container-padding-top">
+    <div className="container container-padding-top2">
       <div className="row">
         {
           stockSymbols.length === 0
@@ -64,12 +64,12 @@ const StockCard = (props) => {
   };
 
   return (
-    <div className="col col-6">
+    <div className="col col-20">
       <div className="row">
-        <div className="col col-6">
+        <div className="col col-6 ticker-bg">
           <Chart query={query} />
         </div>
-        <div className="col col-6">
+        <div className="col col-20">
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">
@@ -107,12 +107,12 @@ const StockCard = (props) => {
               </h6>
               <br />
               <div className="row">
-                <div className="col">High</div>
-                <div className="col">{ !symbolQuote || !symbolQuote['03. high'] ? '-.--' : parseFloat(symbolQuote['03. high']).toFixed(2) }</div>
+                <div className="col highlow">High</div>
+                <div className="col high">{ !symbolQuote || !symbolQuote['03. high'] ? '-.--' : parseFloat(symbolQuote['03. high']).toFixed(2) }</div>
               </div>
               <div className="row">
-                <div className="col">Low</div>
-                <div className="col">{ !symbolQuote || !symbolQuote['04. low'] ? '-.--' : parseFloat(symbolQuote['04. low']).toFixed(2) }</div>
+                <div className="col highlow">Low</div>
+                <div className="col low">{ !symbolQuote || !symbolQuote['04. low'] ? '-.--' : parseFloat(symbolQuote['04. low']).toFixed(2) }</div>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@ const StockCard = (props) => {
 const StockEmptyCard = () => (
   <div className="col">
     <div className="card">
-      <div className="card-body text-center">
+      <div className="card-body-lead text-center">
         Seach and click &ldquo;
         {' '}
         <i className="fa fa-bookmark-o" style={{ color: '#29ab87' }} />
