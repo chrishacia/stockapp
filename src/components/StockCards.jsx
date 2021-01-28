@@ -57,10 +57,10 @@ const StockCard = (props) => {
     }
 
     if (parseFloat(symbolQuote['09. change']) < 0) {
-      return 'fa-arrow-down';
+      return 'fa-arrow-down low';
     }
 
-    return 'fa-arrow-up';
+    return 'fa-arrow-up high';
   };
 
   return (
@@ -96,14 +96,14 @@ const StockCard = (props) => {
               </h6>
               <br />
               <h6 className="card-subtitle mb-2 text-muted">
-                <i className={(`fa ${upDown()}`)} />
-                {' '}
                 $
                 { !symbolQuote || !symbolQuote['05. price'] ? '-.--' : parseFloat(symbolQuote['05. price']).toFixed(2) }
                 {' '}
-                (
-                { !symbolQuote || !symbolQuote['10. change percent'] ? '--.--' : parseFloat(symbolQuote['10. change percent']).toFixed(2) }
-                )
+                <i className={(`fa ${upDown()}`)}>
+                  (
+                  { !symbolQuote || !symbolQuote['10. change percent'] ? '--.--' : parseFloat(symbolQuote['10. change percent']).toFixed(2) }
+                  )
+                </i>
               </h6>
               <br />
               <div className="row">
