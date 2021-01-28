@@ -31,7 +31,7 @@ const SearchBar = (props) => {
   return (
     <div className="container container-padding-top">
       <div className="row">
-        <div className="col col-20">
+        <div className="col">
           <AsyncTypeahead
             filterBy={filterBy}
             id="async-chart"

@@ -64,13 +64,13 @@ const StockCard = (props) => {
   };
 
   return (
-    <div className="col col-20">
+    <div className="col">
       <div className="row">
         <div className="col col-6 ticker-bg">
           <Chart query={query} />
         </div>
-        <div className="col col-20">
-          <div className="card">
+        <div className="col">
+          <div className="card card-hasDetails">
             <div className="card-body">
               <h5 className="card-title">
                 {!symbolQuote || !symbolData.Name ? '-------' : symbolData.Name}
@@ -124,7 +124,7 @@ const StockCard = (props) => {
 
 const StockEmptyCard = () => (
   <div className="col">
-    <div className="card">
+    <div className="card card-isEmpty">
       <div className="card-body-lead text-center">
         Seach and click &ldquo;
         {' '}
