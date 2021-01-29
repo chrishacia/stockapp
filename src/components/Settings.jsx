@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-
 const Settings = (props) => {
   const { callBack, avKey, avCallBack } = props;
   const [currAvKey, setCurrAvKey] = useState(avKey);
