@@ -217,4 +217,3 @@ describe('Search Bar Unit Tests', () => {
 //     expect(wrapper.find('.dropdown-item').length).toBe(2);
 //   });
 // });
-

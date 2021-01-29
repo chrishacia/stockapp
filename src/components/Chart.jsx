@@ -7,13 +7,13 @@ import {
 import cfg from '../config';
 
 const Chart = (props) => {
-  const { query } = props;
-  const { AV_URL, AV_KEY } = cfg;
+  const { query, avKey } = props;
+  const { AV_URL } = cfg;
   const [annualEarnings, setAnnualEarnings] = useState([]);
 
   // get EPS data
   useEffect(async () => {
-    axios.get(`${AV_URL}/query?function=EARNINGS&symbol=${query}&apikey=${AV_KEY}`)
+    axios.get(`${AV_URL}/query?function=EARNINGS&symbol=${query}&apikey=${avKey}`)
       .then((res) => {
         setAnnualEarnings(res.data.annualEarnings);
       })
@@ -42,10 +42,12 @@ const Chart = (props) => {
 
 Chart.defaultProps = {
   query: '',
+  avKey: '',
 };
 
 Chart.propTypes = {
   query: PropTypes.string,
+  avKey: PropTypes.string,
 };
 
 export default Chart;

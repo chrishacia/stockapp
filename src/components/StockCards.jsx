@@ -5,7 +5,7 @@ import cfg from '../config';
 import Chart from './Chart';
 
 const StockCards = (props) => {
-  const { stockSymbols, callBack } = props;
+  const { stockSymbols, callBack, avKey } = props;
 
   return (
     <div className="container container-padding-top2">
@@ -14,7 +14,7 @@ const StockCards = (props) => {
           stockSymbols.length === 0
             ? <StockEmptyCard />
             : stockSymbols.map((o) => (
-              <StockCard key={o} query={o} callBack={callBack} />
+              <StockCard key={o} query={o} callBack={callBack} avKey={avKey} />
             ))
         }
       </div>
@@ -23,14 +23,14 @@ const StockCards = (props) => {
 };
 
 const StockCard = (props) => {
-  const { query, callBack } = props;
-  const { AV_URL, AV_KEY } = cfg;
+  const { query, callBack, avKey } = props;
+  const { AV_URL } = cfg;
   const [symbolData, setSymbolData] = useState([]);
   const [symbolQuote, setSymbolQuote] = useState([]);
 
   // get all data on symbol
   useEffect(async () => {
-    axios.get(`${AV_URL}/query?function=OVERVIEW&symbol=${query}&apikey=${AV_KEY}`)
+    axios.get(`${AV_URL}/query?function=OVERVIEW&symbol=${query}&apikey=${avKey}`)
       .then((res) => {
         setSymbolData(res.data);
       })
@@ -41,7 +41,7 @@ const StockCard = (props) => {
 
   // get quote data on symbol
   useEffect(async () => {
-    axios.get(`${AV_URL}/query?function=GLOBAL_QUOTE&symbol=${query}&apikey=${AV_KEY}`)
+    axios.get(`${AV_URL}/query?function=GLOBAL_QUOTE&symbol=${query}&apikey=${avKey}`)
       .then((res) => {
         setSymbolQuote(res.data['Global Quote']);
       })
@@ -67,7 +67,7 @@ const StockCard = (props) => {
     <div className="col">
       <div className="row">
         <div className="col col-6 ticker-bg">
-          <Chart query={query} />
+          <Chart query={query} avKey={avKey} />
         </div>
         <div className="col">
           <div className="card card-hasDetails">
@@ -138,21 +138,25 @@ const StockEmptyCard = () => (
 
 StockCards.defaultProps = {
   callBack: null,
+  avKey: '',
   stockSymbols: [],
 };
 
 StockCards.propTypes = {
   callBack: PropTypes.func,
+  avKey: PropTypes.string,
   stockSymbols: PropTypes.arrayOf(PropTypes.string),
 };
 
 StockCard.defaultProps = {
   callBack: null,
+  avKey: '',
   query: '',
 };
 
 StockCard.propTypes = {
   callBack: PropTypes.func,
+  avKey: PropTypes.string,
   query: PropTypes.string,
 };
 

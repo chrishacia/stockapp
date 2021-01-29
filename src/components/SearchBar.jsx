@@ -5,15 +5,15 @@ import PropTypes from 'prop-types';
 import cfg from '../config';
 
 const SearchBar = (props) => {
-  const { callBack } = props;
-  const { AV_URL, AV_KEY } = cfg;
+  const { callBack, avKey } = props;
+  const { AV_URL } = cfg;
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
 
   const handleSearch = (query) => {
     setIsLoading(true);
 
-    axios.get(`${AV_URL}/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${AV_KEY}`)
+    axios.get(`${AV_URL}/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${avKey}`)
       .then((res) => {
         const options = res.data.bestMatches.map((i) => ({ name: i['2. name'], symbol: i['1. symbol'] }));
         setOptions(options);
@@ -74,10 +74,12 @@ const SearchBar = (props) => {
 
 SearchBar.defaultProps = {
   callBack: null,
+  avKey: '',
 };
 
 SearchBar.propTypes = {
   callBack: PropTypes.func,
+  avKey: PropTypes.string,
 };
 
 export default SearchBar;
